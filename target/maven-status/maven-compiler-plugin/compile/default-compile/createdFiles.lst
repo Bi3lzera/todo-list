@@ -1,0 +1,4 @@
+com/todolist/TarefaModel.class
+com/todolist/controller/TarefaController.class
+com/todolist/dao/TarefaDAO.class
+com/todolist/connection/BDConnection.class

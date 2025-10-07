@@ -1,0 +1,4 @@
+/home/biel/projpweb/todo-list/src/main/java/com/todolist/model/TarefaModel.java
+/home/biel/projpweb/todo-list/src/main/java/com/todolist/controller/TarefaController.java
+/home/biel/projpweb/todo-list/src/main/java/com/todolist/connection/BDConnection.java
+/home/biel/projpweb/todo-list/src/main/java/com/todolist/dao/TarefaDAO.java
