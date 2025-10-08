@@ -1,0 +1,100 @@
+.main {
+  border-style: solid;
+  width: 80%;
+  height: 60%;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  top: 100;
+}
+
+#formContainer {
+  display: none; /* começa invisível */
+  position: fixed; /* fixa na tela inteira */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(100, 100, 100, 0.6); /* fundo escuro semi-transparente */
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: center; /* centraliza verticalmente */
+  z-index: 9999; /* fica sobre todas as divs */
+}
+
+.content {
+  display: flex;
+  height: 80%;
+}
+
+.buttons {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  margin: 0;
+  left: 0;
+  border-style: solid;
+}
+
+button {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: red;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #e62222;
+}
+
+button,
+button span {
+  transition: 200ms;
+}
+
+button .text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+button .icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(110px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button svg {
+  width: 15px;
+  fill: #eee;
+}
+
+button:hover {
+  background: #ff3636;
+}
+
+button:hover .text {
+  color: transparent;
+}
+
+button:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active .icon svg {
+  transform: scale(0.8);
+}
