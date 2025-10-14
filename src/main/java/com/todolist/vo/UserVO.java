@@ -1,4 +1,4 @@
-package com.todolist.VO;
+package com.todolist.vo;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -27,6 +27,10 @@ public class UserVO {
     public void setPassword(String Password)
             throws NoSuchAlgorithmException, UnsupportedEncodingException  {
         hashedPassword = Hasher.HashString(Password);
+    }
+
+    public byte[] getHashedPassword(){
+        return hashedPassword;
     }
 
     public void setEmail(String Email) {

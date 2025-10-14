@@ -27,10 +27,10 @@ public class LoginDAO {
             ps = conn.prepareStatement(sql);
             ps.setString(1, Email);
             java.sql.ResultSet resp = ps.executeQuery();
-            System.out.println();
+            System.out.println(resp.first());
             return true;
         } catch (Exception e) {
-
+            System.out.println(e);
         }
         return false;
     }

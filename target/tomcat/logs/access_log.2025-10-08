@@ -1,0 +1,12 @@
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:09:44:09 -0300] "GET /todolist HTTP/1.1" 302 - http-bio-8080-exec-2 0
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:09:44:10 -0300] "GET /todolist/ HTTP/1.1" 200 99770 http-bio-8080-exec-3 291
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:09:44:10 -0300] "GET /todolist/css/form.css HTTP/1.1" 200 1611 http-bio-8080-exec-1 2
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:09:44:10 -0300] "GET /todolist/css/syle.css HTTP/1.1" 200 3162 http-bio-8080-exec-4 2
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:09:44:10 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-5 0
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:09:44:19 -0300] "POST /todolist/tarefa HTTP/1.1" 200 - http-bio-8080-exec-7 125
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:09:44:29 -0300] "POST /todolist/tarefa HTTP/1.1" 200 - http-bio-8080-exec-8 14
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:09:45:09 -0300] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 - http-bio-8080-exec-9 0
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:10:16:04 -0300] "GET /todolist/ HTTP/1.1" 200 99395 http-bio-8080-exec-2 54
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:10:16:04 -0300] "GET /todolist/css/syle.css HTTP/1.1" 200 3162 http-bio-8080-exec-2 0
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:10:16:04 -0300] "GET /todolist/css/form.css HTTP/1.1" 200 1611 http-bio-8080-exec-3 1
+0:0:0:0:0:0:0:1 - - [08/Oct/2025:10:16:04 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-1 0

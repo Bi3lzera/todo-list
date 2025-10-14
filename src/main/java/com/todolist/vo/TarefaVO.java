@@ -1,4 +1,4 @@
-package com.todolist.VO;
+package com.todolist.vo;
 
 import java.util.Date;
 

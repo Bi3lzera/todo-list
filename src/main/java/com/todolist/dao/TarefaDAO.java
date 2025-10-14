@@ -4,8 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Connection;
 
-import com.todolist.VO.TarefaVO;
 import com.todolist.connection.BDConnection;
+import com.todolist.vo.TarefaVO;
 
 public class TarefaDAO {
     public boolean insert(TarefaVO Tarefa) {
