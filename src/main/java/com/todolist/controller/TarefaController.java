@@ -2,8 +2,12 @@ package com.todolist.controller;
 
 import java.io.IOException;
 
-import com.todolist.TarefaModel;
+import com.todolist.VO.TarefaVO;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,11 +33,19 @@ public class TarefaController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        TarefaModel tm = new TarefaModel();
-        tm.setTitle("Arrumar a residência");
-        tm.setDescription("Arrumar toda a residência antes que a mãe chegue.");
-        tm.setCreationDate("06/10/2025");
-        tm.setPlannedDate("10/11/2025");
+        TarefaVO tm = new TarefaVO();
+        tm.setTitle(request.getParameter("title"));
+        tm.setDescription(request.getParameter("description"));
+
+        try {
+            String dataTexto = request.getParameter("plannedDate");
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date data = formato.parse(dataTexto);
+
+            tm.setPlannedDate(data);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
 
         TarefaDAO tDao = new TarefaDAO();
         tDao.insert(tm);

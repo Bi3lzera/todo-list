@@ -1,3 +1,0 @@
-0:0:0:0:0:0:0:1 - - [06/Oct/2025:22:35:54 -0300] "GET /todolist/ HTTP/1.1" 200 99770 http-bio-8080-exec-1 541
-0:0:0:0:0:0:0:1 - - [06/Oct/2025:22:35:56 -0300] "POST /todolist/tarefa HTTP/1.1" 200 - http-bio-8080-exec-3 323
-0:0:0:0:0:0:0:1 - - [06/Oct/2025:22:37:43 -0300] "POST /todolist/tarefa HTTP/1.1" 200 - http-bio-8080-exec-5 43

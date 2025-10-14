@@ -1,0 +1,17 @@
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:24:25 -0300] "GET / HTTP/1.1" 404 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:24:30 -0300] "GET /todolist/login HTTP/1.1" 200 2058 http-bio-8080-exec-2 1358
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:24:30 -0300] "GET /todolist/css/login.css HTTP/1.1" 304 - http-bio-8080-exec-3 10
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:24:31 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:24:40 -0300] "POST /todolist/LoginController HTTP/1.1" 404 999 http-bio-8080-exec-5 9
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:25:30 -0300] "GET /todolist/login HTTP/1.1" 200 1985 http-bio-8080-exec-7 106
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:25:40 -0300] "POST /todolist/login HTTP/1.1" 200 - http-bio-8080-exec-8 1257
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:25:47 -0300] "GET /todolist/login HTTP/1.1" 200 1985 http-bio-8080-exec-9 3
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:25:54 -0300] "POST /todolist/login HTTP/1.1" 200 - http-bio-8080-exec-9 125
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:29:07 -0300] "GET /todolist/login HTTP/1.1" 200 1985 http-bio-8080-exec-1 186
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:29:13 -0300] "POST /todolist/login HTTP/1.1" 200 - http-bio-8080-exec-3 1097
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:30:51 -0300] "GET /todolist/login HTTP/1.1" 200 1985 http-bio-8080-exec-1 134
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:30:56 -0300] "POST /todolist/login HTTP/1.1" 200 - http-bio-8080-exec-3 1070
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:31:02 -0300] "GET /todolist/login HTTP/1.1" 200 1985 http-bio-8080-exec-4 5
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:32:24 -0300] "POST /todolist/login HTTP/1.1" 200 - http-bio-8080-exec-1 1047
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:33:18 -0300] "GET /todolist/login HTTP/1.1" 200 1985 http-bio-8080-exec-1 129
+0:0:0:0:0:0:0:1 - - [14/Oct/2025:01:33:23 -0300] "POST /todolist/login HTTP/1.1" 200 - http-bio-8080-exec-3 1112

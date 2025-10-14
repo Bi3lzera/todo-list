@@ -1,4 +1,9 @@
-com/todolist/TarefaModel.class
+com/todolist/dao/LoginDAO.class
 com/todolist/controller/TarefaController.class
-com/todolist/dao/TarefaDAO.class
+com/todolist/util/Hasher.class
+com/todolist/controller/auth/LoginController.class
+com/todolist/VO/TarefaVO.class
 com/todolist/connection/BDConnection.class
+com/todolist/VO/UserVO.class
+com/todolist/dao/TarefaDAO.class
+com/todolist/controller/auth/filter/LoginFilter.class

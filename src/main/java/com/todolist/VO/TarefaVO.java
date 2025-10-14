@@ -1,12 +1,12 @@
-package com.todolist;
+package com.todolist.VO;
 
 import java.util.Date;
 
-public class TarefaModel {
+public class TarefaVO {
     private String description;
     private String title;
-    private String creationDate;
-    private String plannedDate;
+    private Date creationDate;
+    private Date plannedDate;
 
     public String getDescription() {
         return description;
@@ -24,19 +24,15 @@ public class TarefaModel {
         title = Title;
     }
 
-    public String getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String CreationDate) {
-        creationDate = CreationDate;
+    public Date getPlannedDate() {
+        return plannedDate;
     }
 
-    public String getPlannedDate() {
-        return creationDate;
-    }
-
-    public void setPlannedDate(String PlannedDate) {
+    public void setPlannedDate(Date PlannedDate) {
         plannedDate = PlannedDate;
     }
 }

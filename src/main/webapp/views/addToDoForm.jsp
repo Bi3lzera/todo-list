@@ -10,15 +10,11 @@
     <div>
     <div class="content">
     <form name="frm" method="post" action="tarefa">
-            Modelo <input type="text" name="modelo">
+            Título <input type="text" name="title">
             <br>
-            Marca <select name="marca">
-                <option value="Chevrolet">Chevrolet</option>
-                <option value="Volkswagen">Volkswagen</option>
-                <option value="Ford">Ford</option>
-            </select>
+            Data <input type="date" name="plannedDate">
             <br>
-            Ano <input type="text" name="ano">
+            Descrição <input type="text" name="description">
             <br>
             <input type="submit" value="Gravar">
         </form>
