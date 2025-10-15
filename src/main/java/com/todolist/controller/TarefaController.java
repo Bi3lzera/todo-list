@@ -40,7 +40,7 @@ public class TarefaController extends HttpServlet {
 
             tm.setPlannedDate(data);
         } catch (java.text.ParseException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
 
         TarefaDAO tDao = new TarefaDAO();

@@ -1,6 +1,5 @@
 package com.todolist.util;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -14,7 +13,7 @@ public class Hasher {
                     input.getBytes(StandardCharsets.UTF_8));
             return bytesToHex(encodedhash);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Não foi possível encontrar o algoritmo SHA-512", e);
+            throw new RuntimeException("Erro ao gerar a hash da String:\n", e);
         }
     }
 

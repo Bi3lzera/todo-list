@@ -1,3 +1,18 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "emmet.includeLanguages": {
+    "jsp": "html"
+  },
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.jsp": "jsp",
+    "*.tag": "jsp"
+  },
+  "[jsp]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }

@@ -1,13 +1,14 @@
 package com.todolist.dao;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import com.mysql.cj.xdevapi.Result;
 import com.todolist.connection.BDConnection;
 import com.todolist.util.Hasher;
-import com.todolist.util.SessionGen;
 import com.todolist.vo.UserVO;
 
 public class LoginDAO {
@@ -19,8 +20,8 @@ public class LoginDAO {
         try {
             tUser = GetUserData(Email);
             if (tUser != null) {
-                String hashedUserPassword = new String(tUser.getHashedPassword());
-                String hashedParmPassword = new String(Hasher.hashString(Password));
+                String hashedUserPassword = tUser.getHashedPassword();
+                String hashedParmPassword = Hasher.hashString(Password);
 
                 if (hashedUserPassword.toUpperCase().equals(hashedParmPassword.toUpperCase())) {
                     return tUser;
@@ -55,31 +56,10 @@ public class LoginDAO {
                 bdConn.disconnect();
                 return null;
             }
-        } catch (Exception e) {
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException | SQLException e) {
             System.out.println(e);
-            return null;
-        }
-    }
-
-    private boolean registerSession(int userId) {
-        try {
-            Connection conn = bdConn.connect();
-            PreparedStatement ps;
-            String sql = "INSERT INTO sessions (`fkuser`, `sessionhash`) VALUES (?, ?)";
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, userId);
-            ps.setString(2, new SessionGen().genSessionHash());
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                bdConn.disconnect();
-
-                return true;
-            }
             bdConn.disconnect();
-            return false;
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
+            return null;
         }
     }
 }
