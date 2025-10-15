@@ -8,9 +8,6 @@
   <body>
     <div>
       <h1 class="title">TO-DO</h1>
-      <% if (request.getParameter("error") != null && request.getParameter("error") == "1") { 
-        out.print("<p>Email ou Senha incorreto</p>"); 
-      } %>
     </div>
     <div class="wrapper">
       <div class="card-switch">

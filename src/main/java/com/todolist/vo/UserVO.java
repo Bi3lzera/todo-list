@@ -7,13 +7,18 @@ import java.security.NoSuchAlgorithmException;
 import com.todolist.util.Hasher;
 
 public class UserVO {
+
     int userId;
     String name;
     String email;
-    byte hashedPassword[];
+    String hashedPassword;
 
     public int getUserId() {
         return userId;
+    }
+
+    public void setUserId(int Id) {
+        userId = Id;
     }
 
     public void setName(String Name) {
@@ -24,12 +29,16 @@ public class UserVO {
         return name;
     }
 
-    public void setPassword(String Password)
-            throws NoSuchAlgorithmException, UnsupportedEncodingException  {
-        hashedPassword = Hasher.HashString(Password);
+    public void setPassword(String Password, boolean isHashed)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        if (!isHashed) {
+            hashedPassword = Hasher.hashString(Password);
+        } else {
+            hashedPassword = Password;
+        }
     }
 
-    public byte[] getHashedPassword(){
+    public String getHashedPassword() {
         return hashedPassword;
     }
 
