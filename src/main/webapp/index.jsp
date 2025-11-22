@@ -1,17 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> <% if
+(request.getAttribute("tarefas") == null) { String redirectTo =
+request.getContextPath() + "/tarefa"; String qs = request.getQueryString(); if
+(qs != null && !qs.isEmpty()) { redirectTo += "?" + qs; }
+response.sendRedirect(redirectTo); return; } %>
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="css/syle.css" />
+    <link href="css/syle.css" rel="stylesheet" />
   </head>
   <body>
     <div class="superiorDiv">
       <div class="left">
-        <p>Bem Vindo Gabriel Lima</p>
+        <p>Bem Vindo ${authUser.name}</p>
       </div>
       <div class="center">
-        <p>04/10/2025</p>
+        <p>TAREFAS</p>
       </div>
       <div class="right">
         <p>Account</p>
@@ -19,59 +25,49 @@
     </div>
     <div class="mainDiv">
       <div class="todolist">
-        <h1>To-Do</h1>
-
-        <% for (int i = 0; i < 150; i++){ %>
-        <div class="todoitem">
+        <c:forEach items="${tarefas}" var="tarefa">
           <%-- Div main do todo --%>
-          <div class="todoitem-title">
-            <%-- Div que irá compor outras duas divs, responsáveis pelo titulo e data e hora do evento --%>
-            <div class="title"><p>Organizar a casa</p></div>
-            <%-- Titulo do todo --%>
-            <div class="data">
-              <%-- Data do todo --%>
-              <p>21/05/2026 14:56</p>
-              <%-- DADOS --%>
+          <div class="todoitem">
+            <div class="todoitem-title">
+              <div class="title">
+                <p><c:out value="${tarefa.title}" /></p>
+              </div>
+              <div class="data">
+                <p>
+                  <fmt:formatDate
+                    pattern="dd/MM/yyyy"
+                    value="${tarefa.plannedDate}"
+                  />
+                </p>
+              </div>
+            </div>
+            <div class="todoitem-desc">
+              <p><c:out value="${tarefa.description}" /></p>
+            </div>
+            <div class="todoitem-bottom">
+              <div class="todoitem-status">
+                <p>Status:</p>
+                <p><c:out value="${tarefa.status}" /></p>
+              </div>
+              <div class="todoitem-status">
+                <img onClick="abrirDetalhes(
+                  '<c:out value="${tarefa.title}" />',
+                  '<c:out value="${tarefa.description}" />',
+                  '<fmt:formatDate pattern="yyyy-MM-dd" value="${tarefa.plannedDate}" />')"
+                  img src="icons/editbtn.png" alt="Editar" width="50%" height="50%"/>
+                <img src="icons/excluir.png" alt="Editar" width="50%" height="50%"/>
+              </div>
             </div>
           </div>
-          <div class="todoitem-desc">
-            <%-- Div responsável pela descrição detalhada do todo --%>
-            <p>Organizar toda casa, do começo ao começo até chegar ao fim.</p>
-            <%-- DADOS --%>
-          </div>
-          <div class="todoitem-status">
-            <%-- Div resposnável pelos status do todo --%>
-            <p>Status:</p>
-            <%-- DADOS --%>
-            <p>Pendente</p>
-            <%-- DADOS --%>
-          </div>
-        </div>
-        <% } %>
-
-        <div class="todoitem">
-          <div class="todoitem-title">
-            <div class="title"><p>Viajar até mato grosso</p></div>
-            <div class="data">
-              <p>21/05/2026 14:56</p>
-            </div>
-          </div>
-          <div class="todoitem-desc">
-            <p>Organizar toda casa, do começo ao começo até chegar ao fim.</p>
-          </div>
-          <div class="todoitem-status">
-            <p>Status:</p>
-            <p>Pendente</p>
-          </div>
-        </div>
+        </c:forEach>
       </div>
     </div>
     <footer class="footerDiv">
       <div class="buttons">
-        <button class="button" type="button" onClick="abrirForm()">
+        <button class="button" onClick="abrirForm()" type="button">
           <span class="button__text">Add TO-DO</span>
-          <span class="button__icon"
-            ><svg
+          <span class="button__icon">
+            <svg
               class="svg"
               fill="none"
               height="24"
@@ -84,11 +80,11 @@
               xmlns="http://www.w3.org/2000/svg"
             >
               <line x1="12" x2="12" y1="5" y2="19"></line>
-              <line x1="5" x2="19" y1="12" y2="12"></line></svg
-          ></span>
-        </button>g
-
-        <div id="formContainer" style="display:none;">
+              <line x1="5" x2="19" y1="12" y2="12"></line>
+            </svg>
+          </span>
+        </button>
+        <div id="formContainer" style="display: none">
           <%@ include file="views/addToDoForm.jsp" %>
         </div>
       </div>
@@ -96,6 +92,16 @@
     <script>
       function abrirForm() {
         document.getElementById("formContainer").style.display = "flex";
+      }
+      function abrirDetalhes(title, description, plannedDate) {
+        // Seleciona o formulário e seus campos
+        const formContainer = document.getElementById("formContainer");
+        const form = formContainer.querySelector("form");
+        // Preenche os campos do formulário com os dados da tarefa
+        form.querySelector('[name="title"]').value = title;
+        form.querySelector('[name="description"]').value = description;
+        form.querySelector('[name="plannedDate"]').value = plannedDate;
+        formContainer.style.display = "flex";
       }
     </script>
   </body>

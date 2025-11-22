@@ -10,9 +10,13 @@
     "*.tag": "jsp"
   },
   "[jsp]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
-  }
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "Oracle.oracle-java"
+  },
+  "remote.autoForwardPortsFallback": 0
 }

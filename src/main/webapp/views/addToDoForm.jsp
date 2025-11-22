@@ -8,18 +8,27 @@
   <body>
     <div class="main">
     <div>
-    <div class="content">
-    <form name="frm" method="post" action="tarefa">
-            Título <input type="text" name="title">
-            <br>
-            Data <input type="date" name="plannedDate">
-            <br>
-            Descrição <input type="text" name="description">
-            <br>
-            <input type="submit" value="Gravar">
+      <div class="content">
+        <form id="form" name="frm" method="post" action="tarefa">
+          <div class="fContainer">
+            <input type="hidden" name="action" value="create" />
+            <div class="form-group">
+              <label for="title">Título</label>
+              <input type="text" id="title" name="title" required />
+            </div>
+            <div class="form-group">
+              <label for="plannedDate">Data Planejada</label>
+              <input type="date" id="plannedDate" name="plannedDate" required />
+            </div>
+            <div class="form-group">
+              <label for="description">Descrição</label>
+              <textarea id="description" name="description" rows="4"></textarea>
+            </div>
+          </div>
         </form>
-    </div>
-      <div class="buttons">
+      </div>
+      <div class="btns">
+        <button class="form-button save" type="submit" form="form">Gravar</button>
         <button class="noselect" onClick="fecharForm()">
           <span class="text">Fechar</span
           ><span class="icon"
