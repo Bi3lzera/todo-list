@@ -1,0 +1,32 @@
+
+        <% if (tarefas != null) {
+             for (int i = 0; i < tarefas.size(); i++) {
+                 com.todolist.vo.TarefaVO t = (com.todolist.vo.TarefaVO) tarefas.get(i);
+        %>
+          <div class="todoitem">
+            <div class="todoitem-title">
+              <div class="title">
+                <p><%= t.getTitle() %></p>
+              </div>
+              <div class="data">
+                <p><%= (t.getPlannedDate() != null) ? sdf.format(t.getPlannedDate()) : "" %></p>
+              </div>
+            </div>
+            <div class="todoitem-desc">
+              <p><%= t.getDescription() %></p>
+            </div>
+            <div class="todoitem-bottom">
+              <div class="todoitem-status">
+                <p>Status:</p>
+                <p><%= (t.getCreationDate() != null) ? "Pendente" : "Pendente" %></p>
+              </div>
+              <div class="todoitem-status">
+                <img onClick="abrirDetalhes('<%= escapeJs(t.getTitle()) %>', '<%= escapeJs(t.getDescription()) %>', '<%= (t.getPlannedDate() != null) ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(t.getPlannedDate()) : "" %>')"
+                     src="icons/editbtn.png" alt="Editar" width="50%" height="50%"/>
+                <img onClick="excluirTarefa('<%= t.getId() %>')" src="icons/excluir.png" alt="Excluir" width="50%" height="50%"/>
+              </div>
+            </div>
+          </div>
+        <%  }
+           }
+        %>

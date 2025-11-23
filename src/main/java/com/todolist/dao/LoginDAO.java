@@ -62,4 +62,27 @@ public class LoginDAO {
             return null;
         }
     }
+
+    public boolean updateUser(UserVO user) {
+        try {
+            Connection conn = bdConn.connect();
+            if (conn != null) {
+                PreparedStatement ps;
+                String sql = "UPDATE users SET name = ?, email = ?, password = ? WHERE pkuser = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, user.getName());
+                ps.setString(2, user.getEmail());
+                ps.setString(3, user.getHashedPassword());
+                ps.setInt(4, user.getUserId());
+                int updated = ps.executeUpdate();
+                bdConn.disconnect();
+                return updated > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            bdConn.disconnect();
+            return false;
+        }
+        return false;
+    }
 }

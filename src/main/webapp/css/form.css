@@ -12,6 +12,11 @@
   justify-content: center;
 }
 
+.titulo{
+  display: flex;
+  justify-content: center;
+}
+
 #form {
   width: 100%;
 }

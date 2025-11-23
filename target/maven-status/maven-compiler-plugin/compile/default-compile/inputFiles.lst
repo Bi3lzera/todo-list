@@ -1,5 +1,6 @@
 /home/biel/todo-list/src/main/java/com/todolist/connection/BDConnection.java
 /home/biel/todo-list/src/main/java/com/todolist/controller/TarefaController.java
+/home/biel/todo-list/src/main/java/com/todolist/controller/auth/AccountController.java
 /home/biel/todo-list/src/main/java/com/todolist/controller/auth/LoginController.java
 /home/biel/todo-list/src/main/java/com/todolist/controller/auth/filter/LoginFilter.java
 /home/biel/todo-list/src/main/java/com/todolist/dao/LoginDAO.java

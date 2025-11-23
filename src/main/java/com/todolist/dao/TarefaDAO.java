@@ -58,7 +58,6 @@ public class TarefaDAO {
                 bdConn.disconnect();
                 return true;
             }
-
         } catch (SQLException e) {
             System.out.println(e);
             return false;
@@ -67,6 +66,8 @@ public class TarefaDAO {
     }
 
     public boolean delete(int Id) {
+        System.out.println("Excluindo id: " + Id);
+
         try {
             Connection conn = bdConn.connect();
             if (conn != null) {
@@ -106,9 +107,6 @@ public class TarefaDAO {
         }
         // A conexão é fechada automaticamente pelo try-with-resources
         System.out.println("Tarefas encontradas:" + tarefas.size());
-        for (TarefaVO tarefa : tarefas) {
-            System.out.println("ID: " + tarefa.getId() + ", Título: " + tarefa.getTitle() + ", Descrição: " + tarefa.getDescription() + ", Data Planejada: " + tarefa.getPlannedDate() + ", Status: " + tarefa.getStatus());
-        }
 
         return tarefas;
     }

@@ -6,4 +6,5 @@ com/todolist/controller/auth/LoginController.class
 com/todolist/connection/BDConnection.class
 com/todolist/controller/auth/filter/LoginFilter.class
 com/todolist/dao/TarefaDAO.class
+com/todolist/controller/auth/AccountController.class
 com/todolist/vo/TarefaVO.class
