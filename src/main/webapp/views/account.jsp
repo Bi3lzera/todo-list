@@ -14,9 +14,11 @@
     <meta charset="UTF-8" />
     <link href="../css/syle.css" rel="stylesheet" />
     <link href="../css/account.css" rel="stylesheet" />
+    <link rel="icon" href="icons/titleicon.png" type="image/png">
     <title>Minha Conta</title>
   </head>
   <body>
+  <img class="userIcon" src="icons/user.png" width="10%" height="10%">
     <div class="account-container">
       <div class="account-card">
         <h2>Editar Conta</h2>

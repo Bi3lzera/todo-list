@@ -79,6 +79,13 @@ public class TarefaController extends HttpServlet {
                     updateTarefa(request, response);
                     break;
 
+                case "complete":
+                    completeTarefa(request, response);
+                    break;
+
+                case "undone":
+                    undoneTarefa(request, response);
+                    break;
                 default:
                     listTarefas(request, response);
                     break;
@@ -137,6 +144,24 @@ public class TarefaController extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         tarefaDAO.delete(id);
+
+        response.sendRedirect(request.getContextPath() + "/tarefa");
+    }
+
+    private void completeTarefa(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+        tarefaDAO.setStatus(id, "Concluído");
+
+        response.sendRedirect(request.getContextPath() + "/tarefa");
+    }
+
+    private void undoneTarefa(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+        tarefaDAO.setStatus(id, "Pendente");
 
         response.sendRedirect(request.getContextPath() + "/tarefa");
     }

@@ -6,8 +6,15 @@
   --border: #e8eef6;
 }
 
+.userIcon {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    padding-top: 50px;
+}
+
 .account-container {
-  padding-top: 80px;
+  padding-top: 50px;
   min-height: 100vh;
   background: var(--bg, #f0f2f5);
   display: flex;

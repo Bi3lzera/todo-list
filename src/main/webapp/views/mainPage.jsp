@@ -7,6 +7,8 @@
   <head>
     <meta charset="UTF-8" />
     <link href="css/syle.css" rel="stylesheet" />
+    <title>TO-DO</title>
+    <link rel="icon" href="icons/titleicon.png" type="image/png">
   </head>
   <body>
     <div class="superiorDiv">
@@ -30,7 +32,9 @@
             for (int i = 0; i < trfs.size(); i++) {
               TarefaVO t = new TarefaVO();
               t = (TarefaVO) trfs.get(i);
-              out.print("<div class='todoitem'>");
+              boolean isCompleted = "Concluído".equals(t.getStatus());
+              String classes = "todoitem" + (isCompleted ? " completed" : "");
+              out.print("<div class='" + classes + "' ondblclick=\"marcarConcluido(" + t.getId() + ", '" + t.getStatus() + "')\">");
                 out.print("<div class='todoitem-title'>");
                   out.print("<div class='title'>");
                     out.print("<p>" + t.getTitle() + "</p>");
@@ -99,6 +103,33 @@
       </div>
     </footer>
     <script>
+      function marcarConcluido(id, status) {
+        if (status == "Pendente") {
+          var form = document.createElement('form');
+          form.method = 'POST';
+          form.action = 'tarefa?action=complete';
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'id';
+          input.value = id;
+          form.appendChild(input);
+          document.body.appendChild(form);
+          form.submit();
+        }else {
+          var form = document.createElement('form');
+          form.method = 'POST';
+          form.action = 'tarefa?action=undone';
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'id';
+          input.value = id;
+          form.appendChild(input);
+          document.body.appendChild(form);
+          form.submit();
+        }
+
+      }
+
       function abrirForm() {
         document.getElementById("formContainer").style.display = "flex";
         document.getElementById("addTarefa").style.display = "flex";

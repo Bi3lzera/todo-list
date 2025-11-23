@@ -89,7 +89,7 @@ public class TarefaDAO {
 
     public List<TarefaVO> getAll() throws SQLException {
         List<TarefaVO> tarefas = new ArrayList<>();
-        String sql = "SELECT pktarefa, title, description, creationdate, planneddate, status FROM tarefas ORDER BY planneddate ASC";
+        String sql = "SELECT pktarefa, title, description, creationdate, planneddate, status FROM tarefas ORDER BY planneddate, status ASC ";
 
         try (Connection conn = bdConn.connect(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
@@ -109,5 +109,26 @@ public class TarefaDAO {
         System.out.println("Tarefas encontradas:" + tarefas.size());
 
         return tarefas;
+    }
+
+    public boolean setStatus(int Id, String status) {
+        try {
+            Connection conn = bdConn.connect();
+            if (conn != null) {
+                PreparedStatement ps;
+                String sql = "update tarefas set status = ? where pktarefa = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, status);
+                ps.setInt(2, Id);
+                ps.executeUpdate();
+                bdConn.disconnect();
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+        }
+        return false;
     }
 }
