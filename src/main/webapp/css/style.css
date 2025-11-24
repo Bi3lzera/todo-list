@@ -84,6 +84,12 @@ body {
   transform: translateY(0);
 }
 
+.no-tasks {
+  text-align: center;
+  margin-top: 50px;
+  color: #777;
+}
+
 .contabtn {
   display: inline-flex;
   align-items: center;
@@ -343,4 +349,12 @@ body {
 .todoitem.completed .data p {
   background-color: #e6eef6;
   color: #6b7a86;
+}
+
+.no-tasks {
+  text-align: center;
+  margin-top: 50px;
+  color: #777;
+  font-size: 1.2rem;
+  font-weight: 500;
 }

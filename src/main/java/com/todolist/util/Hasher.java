@@ -4,6 +4,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+//
+//Algoritmo responsável por "hashear" uma string, no caso, principalmente a senha, já que ela é armazenada de forma criptografada.
+//
 public class Hasher {
 
     public static String hashString(String input) {

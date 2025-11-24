@@ -6,11 +6,14 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link href="css/syle.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <title>TO-DO</title>
     <link rel="icon" href="icons/titleicon.png" type="image/png">
   </head>
   <body>
+    <%--
+      Constrói a parte superior da página (cabeçalho) da página.
+    --%>
     <div class="superiorDiv">
       <div class="left">
         <p>Bem Vindo ${authUser.name}</p>
@@ -23,12 +26,21 @@
         <a href="<%= request.getContextPath() %>/logout" class="sairlink">Sair</a>
       </div>
     </div>
+    <%--
+      Constrói o corpo principal da página.
+    --%>
     <div class="mainDiv">
       <div class="todolist">
         <%
+          //
+          //Script para gerar todos os itens de tarefa da página.
+          //
           List trfs = (List) request.getAttribute("tarefas");
 
-          if(trfs != null){
+          //Verifica se a List trfs não é nula.
+          if(trfs != null && trfs.size() > 0){
+            //Realiza a criação dos coponentes (itens) de tarefas.
+            //Nesse 'for' sua função é inserir os itens que foram marcados como "concluído"
             for (int i = 0; i < trfs.size(); i++) {
               TarefaVO t = new TarefaVO();
               t = (TarefaVO) trfs.get(i);
@@ -71,6 +83,8 @@
               }
             }
 
+            //Realiza a criação dos coponentes (itens) de tarefas.
+            //Nesse 'for' sua função é inserir os itens que NÃO foram marcados como "concluído" ou seja, estão "pendentes";
             for (int i = 0; i < trfs.size(); i++) {
               TarefaVO t = new TarefaVO();
               t = (TarefaVO) trfs.get(i);
@@ -112,10 +126,15 @@
                 out.print("</div>");
               }
             }
+          }else{
+            out.print("<div class='no-tasks'> <p>Não há tarefas adicionadas.</p> <p>Adicione clicando no botão \"Add TO-DO\".</p> </div>");
           }
         %>
       </div>
     </div>
+    <%--
+      Conjunto de instruções que constrói o rodapé da página.
+    --%>
     <footer class="footerDiv">
       <div class="buttons">
         <button class="button" onClick="abrirForm()" type="button">
@@ -152,7 +171,13 @@
         </div>
       </div>
     </footer>
+    <%-- 
+        Algun scripts em javascript, evitei ao máximo usar, mas não achei uma forma de construir
+        esses scripts usando JSP, pode existir, mas num soube fazer. E como foi algo bem simples,
+        acredito que não será um problema. 
+    --%> 
     <script>
+      //Função para abrir o form para adicionar uma tarefa
       function abrirForm() {
         document.getElementById("formContainer").style.display = "flex";
         document.getElementById("addTarefa").style.display = "flex";
@@ -160,7 +185,6 @@
 
       //Função para abrir os detalhes
       function abrirDetalhes(id, title, description, plannedDate) {
-        document.getElementById("addTarefa").style.display = "none";
 
         // Seleciona o formulário e seus campos
         const editTarefa = document.getElementById("editTarefa");
@@ -175,6 +199,7 @@
         editTarefa.style.display = "flex";
       }
 
+      //Função para abrir o componente que solicita a cofirmação do usuário para exclusão
       function excluirTarefa(id) {
         const confirmDelete = document.getElementById("confirmDelete");
         const form = confirmDelete.querySelector("form");
@@ -182,6 +207,7 @@
         // Faz o preenchimento dos campos do formulário com os dados da tarefa
         form.querySelector('[name="id"]').value = id;
 
+        //"Mostra" o componente de confirmação de exclusão
         document.getElementById("formContainer").style.display = "flex";
         document.getElementById("confirmDelete").style.display = "flex";
       }

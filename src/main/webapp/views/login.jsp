@@ -14,11 +14,9 @@
       </section>
 
       <section class="auth-card">
-        <%-- error handling: show friendly message when error=1 --%>
-        <% if (request.getParameter("error") != null && "1".equals(request.getParameter("error"))) { %>
-          <div class="error-message">Email ou senha incorretos.</div>
-        <% } %>
-
+        <%--
+          Mostra erro ao digitar e-mail ou senha de forma incorreta.
+        --%>
         <div class="flip-card__inner">
           <div class="flip-card__front">
             <div class="title">Acessar conta</div>
@@ -38,6 +36,10 @@
                 type="password"
                 required
               />
+
+              <% if (request.getParameter("error") != null && "1".equals(request.getParameter("error"))) { %>
+                <div class="error-message">Email ou senha incorreto(s).</div>
+              <% } %>
 
               <button class="flip-card__btn" type="submit">Entrar</button>
             </form>
@@ -62,6 +64,9 @@
         </div>
       </section>
     </main>
+    <%--
+      Script que faz o efeitinho "bonito" de "girar" a div de login para a div de registro.    
+    --%>
     <script>
       const authCard = document.querySelector('.auth-card');
       function showRegister() {

@@ -15,12 +15,14 @@ import com.todolist.vo.UserVO;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 
+    //Handle das reuquisições GET
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("views/login.jsp").forward(request, response);
     }
 
+    //Handle das requisições POST
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse respose)
             throws ServletException, IOException {
@@ -35,6 +37,8 @@ public class LoginController extends HttpServlet {
         }
     }
 
+    //Função que faz o handdle de um possível sucesso no login.
+    //Ela realizará o registro do atributo "authUser" no navegador, para que haja uma sessão ativa e o sistema (filter) não bloqueie as páginas.
     private void handleLoginSuccess(HttpServletRequest request, HttpServletResponse response, UserVO user) throws IOException {
         HttpSession session = request.getSession();
         session.setAttribute("authUser", user);
@@ -42,7 +46,9 @@ public class LoginController extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 
+    //Função que faz o handle de um possível erro no login.
+    //Simplesmente retorna um erro para o navegador em formato de url.
     private void handleLoginFailure(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() + "/views/login.jsp?error=1");
+        response.sendRedirect(request.getContextPath() + "/login?error=1");
     }
 }

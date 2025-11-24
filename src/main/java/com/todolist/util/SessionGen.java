@@ -2,6 +2,10 @@ package com.todolist.util;
 
 import java.util.Random;
 
+//
+//Algoritmo sem uso, ideia que acho desnecessária e acredito ter método melhor de ser executado.
+//Mantive para o eventual uso futuro.
+//
 public class SessionGen {
 
     public String genSessionHash() {
