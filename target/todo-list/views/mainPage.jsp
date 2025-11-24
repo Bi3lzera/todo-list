@@ -6,11 +6,14 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link href="css/syle.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <title>TO-DO</title>
     <link rel="icon" href="icons/titleicon.png" type="image/png">
   </head>
   <body>
+    <%--
+      Constrói a parte superior da página (cabeçalho) da página.
+    --%>
     <div class="superiorDiv">
       <div class="left">
         <p>Bem Vindo ${authUser.name}</p>
@@ -18,57 +21,120 @@
       <div class="center">
         <p>TAREFAS</p>
       </div>
-      <div class="right" style="cursor:pointer;" onclick="window.location.href='<%= request.getContextPath() %>/account'">
-        <p>Conta</p>
-        <img src="icons/user.png" width="3.5%" height="3.5%">
+      <div class="right">
+        <a style="cursor:pointer;" href="/account" class="contabtn">Conta <img src="icons/user.png" width="3.5%" height="3.5%"></a>
+        <a href="<%= request.getContextPath() %>/logout" class="sairlink">Sair</a>
       </div>
     </div>
+    <%--
+      Constrói o corpo principal da página.
+    --%>
     <div class="mainDiv">
       <div class="todolist">
         <%
+          //
+          //Script para gerar todos os itens de tarefa da página.
+          //
           List trfs = (List) request.getAttribute("tarefas");
 
-          if(trfs != null){
+          //Verifica se a List trfs não é nula.
+          if(trfs != null && trfs.size() > 0){
+            //Realiza a criação dos coponentes (itens) de tarefas.
+            //Nesse 'for' sua função é inserir os itens que foram marcados como "concluído"
             for (int i = 0; i < trfs.size(); i++) {
               TarefaVO t = new TarefaVO();
               t = (TarefaVO) trfs.get(i);
               boolean isCompleted = "Concluído".equals(t.getStatus());
-              String classes = "todoitem" + (isCompleted ? " completed" : "");
-              out.print("<div class='" + classes + "' ondblclick=\"marcarConcluido(" + t.getId() + ", '" + t.getStatus() + "')\">");
-                out.print("<div class='todoitem-title'>");
-                  out.print("<div class='title'>");
-                    out.print("<p>" + t.getTitle() + "</p>");
+              if (!isCompleted){
+                String classes = "todoitem" + (isCompleted ? " completed" : "");
+                out.print("<div class='" + classes + "' ondblclick=\"marcarConcluido(" + t.getId() + ", '" + t.getStatus() + "')\">");
+                  out.print("<div class='todoitem-title'>");
+                    out.print("<div class='title'>");
+                      out.print("<p>" + t.getTitle() + "</p>");
+                    out.print("</div>");
+                    out.print("<div class='data'>");
+                      out.print("<p>" + t.getPlannedDate() + "</p>");
+                    out.print("</div>");
                   out.print("</div>");
-                  out.print("<div class='data'>");
-                    out.print("<p>" + t.getPlannedDate() + "</p>");
+                  out.print("<div class='todoitem-desc'>");
+                    out.print("<p>" + t.getDescription() + "</p>");
+                  out.print("</div>");
+                  out.print("<div class='todoitem-bottom'>");
+                    out.print("<div class='todoitem-status'>");
+                      out.print("<p>Status:</p>");
+                      out.print("<p>" + t.getStatus() +  "</p>");
+                    out.print("</div>");
+                    out.print("<div class='todoitem-status'>");
+                      out.print("<form method='post' action='" + request.getContextPath() + "/tarefa' style='display:inline'>");
+                      out.print("<input type='hidden' name='action' value='complete' />");
+                      out.print("<input type='hidden' name='id' value='" + t.getId() + "' />");
+                      out.print("<button type='submit' class='statusbtn'>Concluir</button>");
+                      out.print("</form>");
+                      out.print("<img src='icons/editbtn.png' ");
+                      out.print("onClick='abrirDetalhes(\"" 
+                          + t.getId() + "\", \"" 
+                          + t.getTitle() + "\", \"" 
+                          + t.getDescription() + "\", \"" 
+                          + t.getPlannedDate() + "\")'");
+                      out.print("width='50%' height='50%'/>");
+                      out.print("<img onClick='excluirTarefa(" + t.getId() + ")' src='icons/excluir.png' alt='Excluir' width='50%' height='50%'/>");                    out.print("</div>");
                   out.print("</div>");
                 out.print("</div>");
-                out.print("<div class='todoitem-desc'>");
-                  out.print("<p>" + t.getDescription() + "</p>");
-                out.print("</div>");
-                out.print("<div class='todoitem-bottom'>");
-                  out.print("<div class='todoitem-status'>");
-                    out.print("<p>Status:</p>");
-                    out.print("<p>" + t.getStatus() +  "</p>");
-                  out.print("</div>");
-                  out.print("<div class='todoitem-status'>");
-                    out.print("<img src='icons/editbtn.png' ");
-                    out.print("<img src='icons/editbtn.png' ");
-                    out.print("onClick='abrirDetalhes(\"" 
-                        + t.getId() + "\", \"" 
-                        + t.getTitle() + "\", \"" 
-                        + t.getDescription() + "\", \"" 
-                        + t.getPlannedDate() + "\")'");
-                    out.print("width='50%' height='50%'/>");
-                    out.print("<img onClick='excluirTarefa(" + t.getId() + ")' src='icons/excluir.png' alt='Excluir' width='50%' height='50%'/>");
-                  out.print("</div>");
-                out.print("</div>");
-              out.print("</div>");
+              }
             }
+
+            //Realiza a criação dos coponentes (itens) de tarefas.
+            //Nesse 'for' sua função é inserir os itens que NÃO foram marcados como "concluído" ou seja, estão "pendentes";
+            for (int i = 0; i < trfs.size(); i++) {
+              TarefaVO t = new TarefaVO();
+              t = (TarefaVO) trfs.get(i);
+              boolean isCompleted = "Concluído".equals(t.getStatus());
+              if (isCompleted){
+                String classes = "todoitem" + (isCompleted ? " completed" : "");
+                out.print("<div class='" + classes + "' ondblclick=\"marcarConcluido(" + t.getId() + ", '" + t.getStatus() + "')\">");
+                  out.print("<div class='todoitem-title'>");
+                    out.print("<div class='title'>");
+                      out.print("<p>" + t.getTitle() + "</p>");
+                    out.print("</div>");
+                    out.print("<div class='data'>");
+                      out.print("<p>" + t.getPlannedDate() + "</p>");
+                    out.print("</div>");
+                  out.print("</div>");
+                  out.print("<div class='todoitem-desc'>");
+                    out.print("<p>" + t.getDescription() + "</p>");
+                  out.print("</div>");
+                  out.print("<div class='todoitem-bottom'>");
+                    out.print("<div class='todoitem-status'>");
+                      out.print("<p>Status:</p>");
+                      out.print("<p>" + t.getStatus() +  "</p>");
+                    out.print("</div>");
+                    out.print("<div class='todoitem-status'>");
+                      out.print("<form method='post' action='" + request.getContextPath() + "/tarefa' style='display:inline'>");
+                      out.print("<input type='hidden' name='action' value='undone' />");
+                      out.print("<input type='hidden' name='id' value='" + t.getId() + "' />");
+                      out.print("<button type='submit' class='statusbtn'>Desconcluir</button>");
+                      out.print("</form>");
+                      out.print("<img src='icons/editbtn.png' ");
+                      out.print("onClick='abrirDetalhes(\"" 
+                          + t.getId() + "\", \"" 
+                          + t.getTitle() + "\", \"" 
+                          + t.getDescription() + "\", \"" 
+                          + t.getPlannedDate() + "\")'");
+                      out.print("width='50%' height='50%'/>");
+                      out.print("<img onClick='excluirTarefa(" + t.getId() + ")' src='icons/excluir.png' alt='Excluir' width='50%' height='50%'/>");                    out.print("</div>");
+                  out.print("</div>");
+                out.print("</div>");
+              }
+            }
+          }else{
+            out.print("<div class='no-tasks'> <p>Não há tarefas adicionadas.</p> <p>Adicione clicando no botão \"Add TO-DO\".</p> </div>");
           }
         %>
       </div>
     </div>
+    <%--
+      Conjunto de instruções que constrói o rodapé da página.
+    --%>
     <footer class="footerDiv">
       <div class="buttons">
         <button class="button" onClick="abrirForm()" type="button">
@@ -99,48 +165,36 @@
           <div id="editTarefa" style="display: none">
             <%@ include file="editTarefa.jsp" %>
           </div>
+          <div id="confirmDelete" style="display: none">
+            <%@ include file="confirmDelete.jsp" %>
+          </div>
         </div>
       </div>
     </footer>
+    <%-- 
+        Algun scripts em javascript, evitei ao máximo usar, mas não achei uma forma de construir
+        esses scripts usando JSP, pode existir, mas num soube fazer. E como foi algo bem simples,
+        acredito que não será um problema. 
+    --%> 
     <script>
-      function marcarConcluido(id, status) {
-        if (status == "Pendente") {
-          var form = document.createElement('form');
-          form.method = 'POST';
-          form.action = 'tarefa?action=complete';
-          var input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = 'id';
-          input.value = id;
-          form.appendChild(input);
-          document.body.appendChild(form);
-          form.submit();
-        }else {
-          var form = document.createElement('form');
-          form.method = 'POST';
-          form.action = 'tarefa?action=undone';
-          var input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = 'id';
-          input.value = id;
-          form.appendChild(input);
-          document.body.appendChild(form);
-          form.submit();
-        }
-
-      }
-
+      //Função para abrir o form para adicionar uma tarefa
       function abrirForm() {
+        document.getElementById("editTarefa").style.display = "none";
+        document.getElementById("confirmDelete").style.display = "none";
         document.getElementById("formContainer").style.display = "flex";
         document.getElementById("addTarefa").style.display = "flex";
       }
 
+      //Função para abrir os detalhes
       function abrirDetalhes(id, title, description, plannedDate) {
         document.getElementById("addTarefa").style.display = "none";
+        document.getElementById("confirmDelete").style.display = "none";
+
         // Seleciona o formulário e seus campos
         const editTarefa = document.getElementById("editTarefa");
         const form = editTarefa.querySelector("form");
-        // Preenche os campos do formulário com os dados da tarefa
+
+        // Faz o preenchimento dos campos do formulário com os dados da tarefa
         form.querySelector('[name="id"]').value = id;
         form.querySelector('[name="title"]').value = title;
         form.querySelector('[name="description"]').value = description;
@@ -149,10 +203,20 @@
         editTarefa.style.display = "flex";
       }
 
+      //Função para abrir o componente que solicita a cofirmação do usuário para exclusão
       function excluirTarefa(id) {
-        if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
-          window.location.href = "tarefa?action=delete&id=" + id;
-        }
+        document.getElementById("addTarefa").style.display = "none";
+        document.getElementById("editTarefa").style.display = "none";
+
+        const confirmDelete = document.getElementById("confirmDelete");
+        const form = confirmDelete.querySelector("form");
+
+        // Faz o preenchimento dos campos do formulário com os dados da tarefa
+        form.querySelector('[name="id"]').value = id;
+
+        //"Mostra" o componente de confirmação de exclusão
+        document.getElementById("formContainer").style.display = "flex";
+        document.getElementById("confirmDelete").style.display = "flex";
       }
     </script>
   </body>

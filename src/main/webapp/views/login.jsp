@@ -45,7 +45,7 @@
             </form>
 
             <div class="meta">
-              <a href="#" class="muted-link">Esqueceu a senha?</a>
+              <a href="<%=request.getContextPath()%>/recover" class="muted-link">Esqueceu a senha?</a>
               <span class="muted-link">•</span>
               <a href="#" class="muted-link" id="to-register">Criar conta</a>
             </div>

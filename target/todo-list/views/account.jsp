@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="com.todolist.vo.UserVO" %>
 <%
-  // require login
   UserVO user = (UserVO) session.getAttribute("authUser");
   if (user == null) {
     response.sendRedirect(request.getContextPath() + "/views/login.jsp");
@@ -12,7 +11,7 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link href="../css/syle.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
     <link href="../css/account.css" rel="stylesheet" />
     <link rel="icon" href="icons/titleicon.png" type="image/png">
     <title>Minha Conta</title>
@@ -43,7 +42,7 @@
             <label>Nova senha (deixe em branco para manter a atual)</label>
             <input type="password" name="password" />
           </div>
-
+          
           <div class="form-actions">
             <button type="submit" class="button">Salvar</button>
             <a href="<%= request.getContextPath() %>/index.jsp" class="btn-secondary">Voltar</a>

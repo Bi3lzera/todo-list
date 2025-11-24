@@ -5,8 +5,8 @@ com/todolist/connection/BDConnection.class
 com/todolist/controller/auth/filter/LoginFilter.class
 com/todolist/dao/TarefaDAO.class
 com/todolist/controller/auth/AccountController.class
-com/todolist/controller/auth/RegisterController.class
 com/todolist/controller/auth/LogoutController.class
+com/todolist/controller/auth/RegisterController.class
 com/todolist/vo/UserVO.class
 com/todolist/controller/auth/LoginController.class
 com/todolist/util/SessionGen.class

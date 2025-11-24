@@ -1,0 +1,18 @@
+@import url("login.css");
+
+/* Pequenas adaptações específicas para a tela de recuperação */
+.flip-card__front .title {
+    margin-bottom: 6px;
+}
+
+.flip-card__form .flip-card__btn {
+    margin-top: 6px;
+}
+
+/* Ajuste do botão de solicitar código para ficar mais discreto */
+.flip-card__form button[type="button"].flip-card__btn {
+    background: linear-gradient(180deg, #4a5568, #2d3748);
+    font-size: 0.9rem;
+}
+
+/* Mantém responsividade já definida em login.css */

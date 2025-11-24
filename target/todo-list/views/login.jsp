@@ -10,16 +10,13 @@
   <body>
     <main class="wrapper">
       <section class="brand">
-        <h1 class="title">TO-DO</h1>
-        <p class="lead">Organize suas tarefas de forma simples e rápida.</p>
+        <h1 class="titlesite">TO DO</h1>
       </section>
 
       <section class="auth-card">
-        <%-- error handling: show friendly message when error=1 --%>
-        <% if (request.getParameter("error") != null && "1".equals(request.getParameter("error"))) { %>
-          <div class="error-message">Email ou senha incorretos.</div>
-        <% } %>
-
+        <%--
+          Mostra erro ao digitar e-mail ou senha de forma incorreta.
+        --%>
         <div class="flip-card__inner">
           <div class="flip-card__front">
             <div class="title">Acessar conta</div>
@@ -40,11 +37,15 @@
                 required
               />
 
+              <% if (request.getParameter("error") != null && "1".equals(request.getParameter("error"))) { %>
+                <div class="error-message">Email ou senha incorreto(s).</div>
+              <% } %>
+
               <button class="flip-card__btn" type="submit">Entrar</button>
             </form>
 
             <div class="meta">
-              <a href="#" class="muted-link">Esqueceu a senha?</a>
+              <a href="<%=request.getContextPath()%>/recover" class="muted-link">Esqueceu a senha?</a>
               <span class="muted-link">•</span>
               <a href="#" class="muted-link" id="to-register">Criar conta</a>
             </div>
@@ -63,8 +64,10 @@
         </div>
       </section>
     </main>
+    <%--
+      Script que faz o efeitinho "bonito" de "girar" a div de login para a div de registro.    
+    --%>
     <script>
-      // Ensure initial view is login (no class)
       const authCard = document.querySelector('.auth-card');
       function showRegister() {
         authCard.classList.add('show-register');
@@ -74,7 +77,7 @@
       }
       document.getElementById('to-register').addEventListener('click', function(e){ e.preventDefault(); showRegister(); });
       document.getElementById('to-login').addEventListener('click', function(e){ e.preventDefault(); showLogin(); });
-      // keyboard accessibility: toggle with Esc to return to login
+
       document.addEventListener('keydown', function(e){ if(e.key === 'Escape') showLogin(); });
     </script>
   </body>

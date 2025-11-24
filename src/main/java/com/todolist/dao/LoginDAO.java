@@ -119,4 +119,8 @@ public class LoginDAO {
         }
         return false;
     }
+
+    public UserVO getUserByEmail(String Email) {
+        return GetUserData(Email);
+    }
 }

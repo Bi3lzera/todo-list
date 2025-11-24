@@ -30,6 +30,9 @@
       </div>
       <div class="btns">
         <button class="form-button save" type="submit" form="form">Gravar</button>
+        <%--
+          Botão personalizado de terceiros, site: https://uiverse.io/
+        --%>
         <button class="noselect" onClick="fecharForm()">
           <span class="text">Fechar</span
           ><span class="icon"
@@ -47,6 +50,9 @@
         </button>
       </div>
     </div>
+    <%--
+      Script responsável por fechar o formulário, limpando os dados dele.
+    --%>
     <script>
       function fecharForm() {
         document.getElementById("form").reset();

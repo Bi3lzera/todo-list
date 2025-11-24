@@ -47,7 +47,7 @@
               boolean isCompleted = "Concluído".equals(t.getStatus());
               if (!isCompleted){
                 String classes = "todoitem" + (isCompleted ? " completed" : "");
-                out.print("<div class='" + classes + "' ondblclick=\"marcarConcluido(" + t.getId() + ", '" + t.getStatus() + "')\">");
+                out.print("<div class='" + classes + "'>");
                   out.print("<div class='todoitem-title'>");
                     out.print("<div class='title'>");
                       out.print("<p>" + t.getTitle() + "</p>");
@@ -65,7 +65,7 @@
                       out.print("<p>" + t.getStatus() +  "</p>");
                     out.print("</div>");
                     out.print("<div class='todoitem-status'>");
-                      out.print("<form method='post' action='" + request.getContextPath() + "/tarefa' style='display:inline'>");
+                      out.print("<form method='post' action='" + request.getContextPath() + "/tarefa'>");
                       out.print("<input type='hidden' name='action' value='complete' />");
                       out.print("<input type='hidden' name='id' value='" + t.getId() + "' />");
                       out.print("<button type='submit' class='statusbtn'>Concluir</button>");
@@ -91,7 +91,7 @@
               boolean isCompleted = "Concluído".equals(t.getStatus());
               if (isCompleted){
                 String classes = "todoitem" + (isCompleted ? " completed" : "");
-                out.print("<div class='" + classes + "' ondblclick=\"marcarConcluido(" + t.getId() + ", '" + t.getStatus() + "')\">");
+                out.print("<div class='" + classes + "'>");
                   out.print("<div class='todoitem-title'>");
                     out.print("<div class='title'>");
                       out.print("<p>" + t.getTitle() + "</p>");
@@ -179,12 +179,20 @@
     <script>
       //Função para abrir o form para adicionar uma tarefa
       function abrirForm() {
+        //Garante que todos os elementos de formulário estejam ocultos
+        document.getElementById("editTarefa").style.display = "none";
+        document.getElementById("confirmDelete").style.display = "none";
+
+        //"Mostra" o formulário de adicionar tarefa
         document.getElementById("formContainer").style.display = "flex";
         document.getElementById("addTarefa").style.display = "flex";
       }
 
       //Função para abrir os detalhes
       function abrirDetalhes(id, title, description, plannedDate) {
+        //Garante que todos os elementos de formulário estejam ocultos
+        document.getElementById("addTarefa").style.display = "none";
+        document.getElementById("confirmDelete").style.display = "none";
 
         // Seleciona o formulário e seus campos
         const editTarefa = document.getElementById("editTarefa");
@@ -201,6 +209,10 @@
 
       //Função para abrir o componente que solicita a cofirmação do usuário para exclusão
       function excluirTarefa(id) {
+        //Garante que todos os elementos de formulário estejam ocultos
+        document.getElementById("addTarefa").style.display = "none";
+        document.getElementById("editTarefa").style.display = "none";
+
         const confirmDelete = document.getElementById("confirmDelete");
         const form = confirmDelete.querySelector("form");
 
