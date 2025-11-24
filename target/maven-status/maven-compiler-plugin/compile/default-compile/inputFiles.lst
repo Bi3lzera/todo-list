@@ -2,6 +2,8 @@
 /home/biel/todo-list/src/main/java/com/todolist/controller/TarefaController.java
 /home/biel/todo-list/src/main/java/com/todolist/controller/auth/AccountController.java
 /home/biel/todo-list/src/main/java/com/todolist/controller/auth/LoginController.java
+/home/biel/todo-list/src/main/java/com/todolist/controller/auth/LogoutController.java
+/home/biel/todo-list/src/main/java/com/todolist/controller/auth/RegisterController.java
 /home/biel/todo-list/src/main/java/com/todolist/controller/auth/filter/LoginFilter.java
 /home/biel/todo-list/src/main/java/com/todolist/dao/LoginDAO.java
 /home/biel/todo-list/src/main/java/com/todolist/dao/TarefaDAO.java

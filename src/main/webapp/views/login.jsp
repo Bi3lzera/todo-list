@@ -10,8 +10,7 @@
   <body>
     <main class="wrapper">
       <section class="brand">
-        <h1 class="title">TO-DO</h1>
-        <p class="lead">Organize suas tarefas de forma simples e rápida.</p>
+        <h1 class="titlesite">TO DO</h1>
       </section>
 
       <section class="auth-card">
@@ -64,7 +63,6 @@
       </section>
     </main>
     <script>
-      // Ensure initial view is login (no class)
       const authCard = document.querySelector('.auth-card');
       function showRegister() {
         authCard.classList.add('show-register');
@@ -74,7 +72,7 @@
       }
       document.getElementById('to-register').addEventListener('click', function(e){ e.preventDefault(); showRegister(); });
       document.getElementById('to-login').addEventListener('click', function(e){ e.preventDefault(); showLogin(); });
-      // keyboard accessibility: toggle with Esc to return to login
+
       document.addEventListener('keydown', function(e){ if(e.key === 'Escape') showLogin(); });
     </script>
   </body>

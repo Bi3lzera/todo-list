@@ -18,5 +18,8 @@
   "[xml]": {
     "editor.defaultFormatter": "Oracle.oracle-java"
   },
-  "remote.autoForwardPortsFallback": 0
+  "remote.autoForwardPortsFallback": 0,
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  }
 }

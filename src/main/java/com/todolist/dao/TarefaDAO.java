@@ -18,16 +18,17 @@ public class TarefaDAO {
         this.bdConn = new BDConnection();
     }
 
-    public boolean insert(TarefaVO Tarefa) {
+    public boolean insert(TarefaVO Tarefa, int UserId) {
         try {
             Connection conn = bdConn.connect();
             if (conn != null) {
                 PreparedStatement ps;
-                String sql = "insert into tarefas (title, description, planneddate) values (?,?,?)";
+                String sql = "insert into tarefas (title, description, planneddate, fkuser) values (?,?,?,?)";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, Tarefa.getTitle());
                 ps.setString(2, Tarefa.getDescription());
                 ps.setDate(3, new java.sql.Date(Tarefa.getPlannedDate().getTime()));
+                ps.setInt(4, UserId);
                 int resp = ps.executeUpdate();
                 bdConn.disconnect();
                 if (resp != 0) {
@@ -87,9 +88,9 @@ public class TarefaDAO {
         return false;
     }
 
-    public List<TarefaVO> getAll() throws SQLException {
+    public List<TarefaVO> getAll(int Id) throws SQLException {
         List<TarefaVO> tarefas = new ArrayList<>();
-        String sql = "SELECT pktarefa, title, description, creationdate, planneddate, status FROM tarefas ORDER BY planneddate, status ASC ";
+        String sql = "SELECT pktarefa, title, description, creationdate, planneddate, status FROM tarefas WHERE fkuser LIKE '" + Id + "' ORDER BY planneddate ASC ";
 
         try (Connection conn = bdConn.connect(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 

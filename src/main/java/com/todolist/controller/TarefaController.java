@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.todolist.dao.TarefaDAO;
 import com.todolist.vo.TarefaVO;
+import com.todolist.vo.UserVO;
 
 @WebServlet("/tarefa")
 public class TarefaController extends HttpServlet {
@@ -40,6 +41,10 @@ public class TarefaController extends HttpServlet {
 
                 case "delete":
                     deleteTarefa(request, response);
+                    break;
+
+                case "confirmDelete":
+                    showConfirmDelete(request, response);
                     break;
 
                 case "list":
@@ -99,10 +104,24 @@ public class TarefaController extends HttpServlet {
     private void listTarefas(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
-        List<TarefaVO> listaDeTarefas = tarefaDAO.getAll();
+        UserVO authUser = (UserVO) request.getSession().getAttribute("authUser");
+        if (authUser == null) {
+            response.sendRedirect(request.getContextPath() + "/views/login.jsp");
+            return;
+        }
+
+        List<TarefaVO> listaDeTarefas = tarefaDAO.getAll(authUser.getUserId());
         request.setAttribute("tarefas", listaDeTarefas);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/mainPage.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showConfirmDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String id = request.getParameter("id");
+        request.setAttribute("deleteId", id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/confirmDelete.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -116,7 +135,13 @@ public class TarefaController extends HttpServlet {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         tarefa.setPlannedDate(formato.parse(request.getParameter("plannedDate")));
 
-        tarefaDAO.insert(tarefa);
+        UserVO authUser = (UserVO) request.getSession().getAttribute("authUser");
+        if (authUser == null) {
+            response.sendRedirect(request.getContextPath() + "/views/login.jsp");
+            return;
+        }
+
+        tarefaDAO.insert(tarefa, authUser.getUserId());
 
         response.sendRedirect(request.getContextPath() + "/tarefa");
     }

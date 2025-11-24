@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.todolist.connection.BDConnection;
 import com.todolist.util.Hasher;
@@ -77,6 +78,39 @@ public class LoginDAO {
                 int updated = ps.executeUpdate();
                 bdConn.disconnect();
                 return updated > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            bdConn.disconnect();
+            return false;
+        }
+        return false;
+    }
+
+    public boolean create(UserVO user) {
+        try {
+            // não permite duplicar email
+            if (GetUserData(user.getEmail()) != null) {
+                return false;
+            }
+
+            Connection conn = bdConn.connect();
+            if (conn != null) {
+                PreparedStatement ps;
+                String sql = "INSERT INTO users (name, email, password) VALUES (?,?,?)";
+                ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, user.getName());
+                ps.setString(2, user.getEmail());
+                ps.setString(3, user.getHashedPassword());
+                int inserted = ps.executeUpdate();
+                if (inserted > 0) {
+                    ResultSet keys = ps.getGeneratedKeys();
+                    if (keys.next()) {
+                        user.setUserId(keys.getInt(1));
+                    }
+                }
+                bdConn.disconnect();
+                return inserted > 0;
             }
         } catch (SQLException e) {
             System.out.println(e);

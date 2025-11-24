@@ -2,6 +2,7 @@
 package com.todolist.controller.auth.filter;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -25,6 +26,7 @@ public class LoginFilter implements Filter {
 
         String loginPath = httpRequest.getContextPath() + "/login";
         String loginPageURI = httpRequest.getContextPath() + "/views/login.jsp";
+        String registerPath = httpRequest.getContextPath() + "/signup";
         String cssURI = httpRequest.getContextPath() + "/css";
         String loginCSSURI = httpRequest.getContextPath() + "/css/login.css";
 
@@ -33,8 +35,9 @@ public class LoginFilter implements Filter {
         boolean cssRequest = httpRequest.getRequestURI().startsWith(cssURI);
         boolean loginPageRequest = httpRequest.getRequestURI().equals(loginPageURI);
         boolean loginCSSRequest = httpRequest.getRequestURI().equals(loginCSSURI);
+        boolean registerRequest = httpRequest.getRequestURI().equals(registerPath);
 
-        if (loggedIn || loginRequest || cssRequest || loginPageRequest || loginCSSRequest) {
+        if (loggedIn || loginRequest || cssRequest || loginPageRequest || loginCSSRequest || registerRequest) {
             chain.doFilter(request, response);
         } else {
             httpResponse.sendRedirect(loginPath);

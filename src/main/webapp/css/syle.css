@@ -60,9 +60,91 @@ body {
   cursor: pointer;
 }
 
+.sairlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #f7fafc;
+  color: #2d3748;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.sairlink:hover {
+  background: #edf2f7;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.sairlink:active {
+  transform: translateY(0);
+}
+
+.contabtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: transparent;
+  color: #2d3748;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.contabtn img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.contabtn:hover {
+  background: #f7fafc;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.contabtn:active {
+  transform: translateY(0);
+}
+
+.statusbtn {
+  padding: 6px 10px;
+  background: #edf2f7;
+  color: #1f2937;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.14s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.statusbtn:hover {
+  background: #e2eef7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(2, 6, 23, 0.06);
+}
+
+/* Completed variation — uses ancestor class */
+.todoitem.completed .statusbtn {
+  background: transparent;
+  color: #6b6b6b;
+  border-color: transparent;
+  text-decoration: line-through;
+  opacity: 0.95;
+}
+
 .mainDiv {
   background-color: #f0f2f5;
-  padding: 80px 20px 100px 20px; /* Top padding for header, bottom for footer */
+  padding: 80px 20px 100px 20px;
+  /* Top padding for header, bottom for footer */
   min-height: 100vh;
 }
 

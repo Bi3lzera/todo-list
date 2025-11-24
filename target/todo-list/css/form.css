@@ -1,21 +1,85 @@
 .main {
-  background-color: white;
-  width: 30%;
-  height: 60%;
+  background-color: #f4f7f6;
+  width: 450px;
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   align-items: center;
   align-self: center;
   justify-content: center;
-  top: 100;
+}
+
+.titulo{
+  display: flex;
+  justify-content: center;
+}
+
+#form {
+  width: 100%;
+}
+
+/* Container do formulário */
+.fContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
 }
 
 #formContainer {
-  display: none; 
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(100, 100, 100, 0.6); 
+  background: rgba(100, 100, 100, 0.6);
   justify-content: center;
   align-items: center;
   z-index: 9999;
@@ -23,44 +87,62 @@
 
 .content {
   display: flex;
-  height: 80%;
-}
-
-.buttons {
-  position: relative;
-  bottom: 0;
   width: 100%;
-  height: 50px;
-  display: flex;
-  margin: 0;
-  left: 0;
 }
 
-button {
+.btns {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 25px;
+  background-color: #e9ecef;
+  border-top: 1px solid #dee2e6;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+/* Botão de Gravar */
+.form-button.save {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  background-color: #007bff;
+  color: white;
+}
+
+.form-button.save:hover {
+  background-color: #0056b3;
+}
+
+/* Botão de Fechar */
+.noselect {
   width: 150px;
   height: 50px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  background: red;
   border: none;
   border-radius: 5px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
   background: #e62222;
 }
 
-button,
-button span {
+.noselect,
+.noselect span {
   transition: 200ms;
 }
 
-button .text {
+.noselect .text {
   transform: translateX(35px);
   color: white;
   font-weight: bold;
 }
 
-button .icon {
+.noselect .icon {
   position: absolute;
   border-left: 1px solid #c41b1b;
   transform: translateX(110px);
@@ -71,29 +153,30 @@ button .icon {
   justify-content: center;
 }
 
-button svg {
+/* Mantém o ícone do botão fechar */
+.noselect svg {
   width: 15px;
   fill: #eee;
 }
 
-button:hover {
+.noselect:hover {
   background: #ff3636;
 }
 
-button:hover .text {
+.noselect:hover .text {
   color: transparent;
 }
 
-button:hover .icon {
+.noselect:hover .icon {
   width: 150px;
   border-left: none;
   transform: translateX(0);
 }
 
-button:focus {
+.noselect:focus {
   outline: none;
 }
 
-button:active .icon svg {
+.noselect:active .icon svg {
   transform: scale(0.8);
 }

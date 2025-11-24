@@ -18,9 +18,9 @@
       <div class="center">
         <p>TAREFAS</p>
       </div>
-      <div class="right" style="cursor:pointer;" onclick="window.location.href='<%= request.getContextPath() %>/account'">
-        <p>Conta</p>
-        <img src="icons/user.png" width="3.5%" height="3.5%">
+      <div class="right">
+        <a style="cursor:pointer;" href="/account" class="contabtn">Conta <img src="icons/user.png" width="3.5%" height="3.5%"></a>
+        <a href="<%= request.getContextPath() %>/logout" class="sairlink">Sair</a>
       </div>
     </div>
     <div class="mainDiv">
@@ -33,37 +33,84 @@
               TarefaVO t = new TarefaVO();
               t = (TarefaVO) trfs.get(i);
               boolean isCompleted = "Concluído".equals(t.getStatus());
-              String classes = "todoitem" + (isCompleted ? " completed" : "");
-              out.print("<div class='" + classes + "' ondblclick=\"marcarConcluido(" + t.getId() + ", '" + t.getStatus() + "')\">");
-                out.print("<div class='todoitem-title'>");
-                  out.print("<div class='title'>");
-                    out.print("<p>" + t.getTitle() + "</p>");
+              if (!isCompleted){
+                String classes = "todoitem" + (isCompleted ? " completed" : "");
+                out.print("<div class='" + classes + "' ondblclick=\"marcarConcluido(" + t.getId() + ", '" + t.getStatus() + "')\">");
+                  out.print("<div class='todoitem-title'>");
+                    out.print("<div class='title'>");
+                      out.print("<p>" + t.getTitle() + "</p>");
+                    out.print("</div>");
+                    out.print("<div class='data'>");
+                      out.print("<p>" + t.getPlannedDate() + "</p>");
+                    out.print("</div>");
                   out.print("</div>");
-                  out.print("<div class='data'>");
-                    out.print("<p>" + t.getPlannedDate() + "</p>");
+                  out.print("<div class='todoitem-desc'>");
+                    out.print("<p>" + t.getDescription() + "</p>");
+                  out.print("</div>");
+                  out.print("<div class='todoitem-bottom'>");
+                    out.print("<div class='todoitem-status'>");
+                      out.print("<p>Status:</p>");
+                      out.print("<p>" + t.getStatus() +  "</p>");
+                    out.print("</div>");
+                    out.print("<div class='todoitem-status'>");
+                      out.print("<form method='post' action='" + request.getContextPath() + "/tarefa' style='display:inline'>");
+                      out.print("<input type='hidden' name='action' value='complete' />");
+                      out.print("<input type='hidden' name='id' value='" + t.getId() + "' />");
+                      out.print("<button type='submit' class='statusbtn'>Concluir</button>");
+                      out.print("</form>");
+                      out.print("<img src='icons/editbtn.png' ");
+                      out.print("onClick='abrirDetalhes(\"" 
+                          + t.getId() + "\", \"" 
+                          + t.getTitle() + "\", \"" 
+                          + t.getDescription() + "\", \"" 
+                          + t.getPlannedDate() + "\")'");
+                      out.print("width='50%' height='50%'/>");
+                      out.print("<img onClick='excluirTarefa(" + t.getId() + ")' src='icons/excluir.png' alt='Excluir' width='50%' height='50%'/>");                    out.print("</div>");
                   out.print("</div>");
                 out.print("</div>");
-                out.print("<div class='todoitem-desc'>");
-                  out.print("<p>" + t.getDescription() + "</p>");
-                out.print("</div>");
-                out.print("<div class='todoitem-bottom'>");
-                  out.print("<div class='todoitem-status'>");
-                    out.print("<p>Status:</p>");
-                    out.print("<p>" + t.getStatus() +  "</p>");
+              }
+            }
+
+            for (int i = 0; i < trfs.size(); i++) {
+              TarefaVO t = new TarefaVO();
+              t = (TarefaVO) trfs.get(i);
+              boolean isCompleted = "Concluído".equals(t.getStatus());
+              if (isCompleted){
+                String classes = "todoitem" + (isCompleted ? " completed" : "");
+                out.print("<div class='" + classes + "' ondblclick=\"marcarConcluido(" + t.getId() + ", '" + t.getStatus() + "')\">");
+                  out.print("<div class='todoitem-title'>");
+                    out.print("<div class='title'>");
+                      out.print("<p>" + t.getTitle() + "</p>");
+                    out.print("</div>");
+                    out.print("<div class='data'>");
+                      out.print("<p>" + t.getPlannedDate() + "</p>");
+                    out.print("</div>");
                   out.print("</div>");
-                  out.print("<div class='todoitem-status'>");
-                    out.print("<img src='icons/editbtn.png' ");
-                    out.print("<img src='icons/editbtn.png' ");
-                    out.print("onClick='abrirDetalhes(\"" 
-                        + t.getId() + "\", \"" 
-                        + t.getTitle() + "\", \"" 
-                        + t.getDescription() + "\", \"" 
-                        + t.getPlannedDate() + "\")'");
-                    out.print("width='50%' height='50%'/>");
-                    out.print("<img onClick='excluirTarefa(" + t.getId() + ")' src='icons/excluir.png' alt='Excluir' width='50%' height='50%'/>");
+                  out.print("<div class='todoitem-desc'>");
+                    out.print("<p>" + t.getDescription() + "</p>");
+                  out.print("</div>");
+                  out.print("<div class='todoitem-bottom'>");
+                    out.print("<div class='todoitem-status'>");
+                      out.print("<p>Status:</p>");
+                      out.print("<p>" + t.getStatus() +  "</p>");
+                    out.print("</div>");
+                    out.print("<div class='todoitem-status'>");
+                      out.print("<form method='post' action='" + request.getContextPath() + "/tarefa' style='display:inline'>");
+                      out.print("<input type='hidden' name='action' value='undone' />");
+                      out.print("<input type='hidden' name='id' value='" + t.getId() + "' />");
+                      out.print("<button type='submit' class='statusbtn'>Desconcluir</button>");
+                      out.print("</form>");
+                      out.print("<img src='icons/editbtn.png' ");
+                      out.print("onClick='abrirDetalhes(\"" 
+                          + t.getId() + "\", \"" 
+                          + t.getTitle() + "\", \"" 
+                          + t.getDescription() + "\", \"" 
+                          + t.getPlannedDate() + "\")'");
+                      out.print("width='50%' height='50%'/>");
+                      out.print("<img onClick='excluirTarefa(" + t.getId() + ")' src='icons/excluir.png' alt='Excluir' width='50%' height='50%'/>");                    out.print("</div>");
                   out.print("</div>");
                 out.print("</div>");
-              out.print("</div>");
+              }
             }
           }
         %>
@@ -99,48 +146,27 @@
           <div id="editTarefa" style="display: none">
             <%@ include file="editTarefa.jsp" %>
           </div>
+          <div id="confirmDelete" style="display: none">
+            <%@ include file="confirmDelete.jsp" %>
+          </div>
         </div>
       </div>
     </footer>
     <script>
-      function marcarConcluido(id, status) {
-        if (status == "Pendente") {
-          var form = document.createElement('form');
-          form.method = 'POST';
-          form.action = 'tarefa?action=complete';
-          var input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = 'id';
-          input.value = id;
-          form.appendChild(input);
-          document.body.appendChild(form);
-          form.submit();
-        }else {
-          var form = document.createElement('form');
-          form.method = 'POST';
-          form.action = 'tarefa?action=undone';
-          var input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = 'id';
-          input.value = id;
-          form.appendChild(input);
-          document.body.appendChild(form);
-          form.submit();
-        }
-
-      }
-
       function abrirForm() {
         document.getElementById("formContainer").style.display = "flex";
         document.getElementById("addTarefa").style.display = "flex";
       }
 
+      //Função para abrir os detalhes
       function abrirDetalhes(id, title, description, plannedDate) {
         document.getElementById("addTarefa").style.display = "none";
+
         // Seleciona o formulário e seus campos
         const editTarefa = document.getElementById("editTarefa");
         const form = editTarefa.querySelector("form");
-        // Preenche os campos do formulário com os dados da tarefa
+
+        // Faz o preenchimento dos campos do formulário com os dados da tarefa
         form.querySelector('[name="id"]').value = id;
         form.querySelector('[name="title"]').value = title;
         form.querySelector('[name="description"]').value = description;
@@ -150,9 +176,14 @@
       }
 
       function excluirTarefa(id) {
-        if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
-          window.location.href = "tarefa?action=delete&id=" + id;
-        }
+        const confirmDelete = document.getElementById("confirmDelete");
+        const form = confirmDelete.querySelector("form");
+
+        // Faz o preenchimento dos campos do formulário com os dados da tarefa
+        form.querySelector('[name="id"]').value = id;
+
+        document.getElementById("formContainer").style.display = "flex";
+        document.getElementById("confirmDelete").style.display = "flex";
       }
     </script>
   </body>
