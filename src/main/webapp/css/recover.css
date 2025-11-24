@@ -1,0 +1,14 @@
+@import url("login.css");
+
+.flip-card__front .title {
+    margin-bottom: 6px;
+}
+
+.flip-card__form .flip-card__btn {
+    margin-top: 6px;
+}
+
+.flip-card__form button[type="button"].flip-card__btn {
+    background: linear-gradient(180deg, #4a5568, #2d3748);
+    font-size: 0.9rem;
+}
