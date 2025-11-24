@@ -70,9 +70,13 @@ Criar tabelas conforme scripts SQL.
 ```
 mvn clean package
 ```
+ou
+```
+mvn tomcat7:run
+```
 
 ### 4. Deploy
-Executar o arquivo `.war` em Tomcat 8+, Jetty ou similar.
+Executar o arquivo `.war` em Tomcat 7+, Jetty ou similar.
 
 ## Observações
 - Recuperação de senha é simplificada.
