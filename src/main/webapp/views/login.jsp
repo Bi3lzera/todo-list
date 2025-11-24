@@ -26,6 +26,7 @@
                 name="email"
                 placeholder="Email"
                 type="email"
+                autocomplete="email"
                 required
               />
 
@@ -34,6 +35,7 @@
                 name="password"
                 placeholder="Senha"
                 type="password"
+                autocomplete="current-password"
                 required
               />
 
@@ -55,8 +57,8 @@
             <div class="title">Criar conta</div>
             <form class="flip-card__form" method="post" action="signup">
               <input class="flip-card__input" name="name" placeholder="Nome" type="text" required />
-              <input class="flip-card__input" name="email" placeholder="Email" type="email" required />
-              <input class="flip-card__input" name="password" placeholder="Senha" type="password" required />
+              <input class="flip-card__input" name="email" placeholder="Email" type="email" autocomplete="email" required />
+              <input class="flip-card__input" name="password" placeholder="Senha" type="password" autocomplete="new-password" required />
               <button class="flip-card__btn" type="submit">Criar conta</button>
             </form>
             <div class="meta"><a href="#" class="muted-link" id="to-login">Já tem conta? Entre</a></div>
