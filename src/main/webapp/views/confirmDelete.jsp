@@ -1,17 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<!DOCTYPE html>
-<html lang="pt-BR">
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+
   <head>
     <meta charset="UTF-8" />
-    <link href="css/syle.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <link href="css/confirmDelete.css" rel="stylesheet" />
     <title>Confirmar Exclusão</title>
   </head>
+
   <body>
     <div id="confirmDeleteContainer">
       <div class="confirm-box">
         <h2>Confirmar exclusão</h2>
-        <p>Tem certeza que deseja excluir esta tarefa? Esta ação não pode ser desfeita.</p>
+        <p>Tem certeza que deseja excluir esta tarefa? Esta ação não poderá ser desfeita.</p>
 
         <div class="confirm-actions">
           <form method="get" action="<%= request.getContextPath() %>/tarefa">
@@ -25,4 +27,5 @@
       </div>
     </div>
   </body>
-</html>
+
+  </html>

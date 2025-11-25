@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <link href="css/style.css" rel="stylesheet" />
     <title>TO-DO</title>
-    <link rel="icon" href="icons/titleicon.png" type="image/png">
+ <link rel="icon" href="icons/titleicon.png" type="image/png">
   </head>
   <body>
     <%--
@@ -16,7 +16,7 @@
     --%>
     <div class="superiorDiv">
       <div class="left">
-        <p>Bem Vindo ${authUser.name}</p>
+  <p>Bem Vindo ${authUser.name}</p>
       </div>
       <div class="center">
         <p>TAREFAS</p>
@@ -127,11 +127,12 @@
               }
             }
           }else{
+            //Caso não haja nenhuma tarefa na variável trfs, então é renderizado uma mensagem dizendo que não há tarefas.
             out.print("<div class='no-tasks'> <p>Não há tarefas adicionadas.</p> <p>Adicione clicando no botão \"Add TO-DO\".</p> </div>");
           }
         %>
       </div>
-    </div>
+</div>
     <%--
       Conjunto de instruções que constrói o rodapé da página.
     --%>
@@ -172,14 +173,14 @@
       </div>
     </footer>
     <%-- 
-        Algun scripts em javascript, evitei ao máximo usar, mas não achei uma forma de construir
+        Alguns scripts em javascript, evitei ao máximo usar, mas não achei uma forma de construir
         esses scripts usando JSP, pode existir, mas num soube fazer. E como foi algo bem simples,
         acredito que não será um problema. 
     --%> 
     <script>
       //Função para abrir o form para adicionar uma tarefa
       function abrirForm() {
-        //Garante que todos os elementos de formulário estejam ocultos
+        //Garante que todos os elementos de outros formulário estejam ocultos
         document.getElementById("editTarefa").style.display = "none";
         document.getElementById("confirmDelete").style.display = "none";
 
@@ -190,7 +191,7 @@
 
       //Função para abrir os detalhes
       function abrirDetalhes(id, title, description, plannedDate) {
-        //Garante que todos os elementos de formulário estejam ocultos
+        //Garante que todos os elementos de outros formulário estejam ocultos
         document.getElementById("addTarefa").style.display = "none";
         document.getElementById("confirmDelete").style.display = "none";
 
@@ -203,20 +204,25 @@
         form.querySelector('[name="title"]').value = title;
         form.querySelector('[name="description"]').value = description;
         form.querySelector('[name="plannedDate"]').value = plannedDate;
+
+        //"Mostra" o formulário de detalhes.
         document.getElementById("formContainer").style.display = "flex";
         editTarefa.style.display = "flex";
       }
 
       //Função para abrir o componente que solicita a cofirmação do usuário para exclusão
       function excluirTarefa(id) {
-        //Garante que todos os elementos de formulário estejam ocultos
+        //Garante que todos os elementos de outros formulário estejam ocultos
         document.getElementById("addTarefa").style.display = "none";
         document.getElementById("editTarefa").style.display = "none";
 
+        // Seleciona o formulário e seus campos
         const confirmDelete = document.getElementById("confirmDelete");
         const form = confirmDelete.querySelector("form");
 
-        // Faz o preenchimento dos campos do formulário com os dados da tarefa
+        // Faz o preenchimento do campo hidden ID do formulário de confirmação de exclusão com os dados da tarefa.
+        // Necessário para ele executar a exclusão. Não sei se teria outra forma melhor, tbm tentei passar os dados usando JSP,
+        // mas sem sucesso.
         form.querySelector('[name="id"]').value = id;
 
         //"Mostra" o componente de confirmação de exclusão

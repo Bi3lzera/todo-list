@@ -22,7 +22,7 @@ public class TarefaController extends HttpServlet {
 
     private final TarefaDAO tarefaDAO = new TarefaDAO();
 
-    //Handle das requisições com method GET
+    // Handle das requisições com method GET
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,7 +36,7 @@ public class TarefaController extends HttpServlet {
         processRequest(request, response);
     }
 
-    //Handle das requisições com method POST
+    // Handle das requisições com method POST
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,55 +51,58 @@ public class TarefaController extends HttpServlet {
         processRequest(request, response);
     }
 
-    //Faz o processamento de ambas requests (GET e POST)
+    // Faz o processamento de ambas requests (GET e POST)
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        //Faz com que por padrão a action seja list, caso nula.
-        //Tá funcionando assim, tentei mexer e quebrou, então vou deixar assim :).
+        // Faz com que por padrão a action seja list, caso nula.
+        // Tá funcionando assim, tentei mexer e quebrou, então vou deixar assim :).
         if (action == null) {
             action = "list";
         }
 
-        //Realiza o try catch para executar o que foi requisitado.
+        // Realiza o try catch para executar o que foi requisitado.
         try {
             switch (action) {
 
-                //Cria tarefa
+                // Cria tarefa
                 case "create":
                     createTarefa(request, response);
                     break;
 
-                //Altera uma tarefa por determinado ID fornecido.
+                // Altera uma tarefa por determinado ID fornecido.
                 case "update":
                     updateTarefa(request, response);
                     break;
 
-                //"Marca" uma tarefa com Concluída, usando determinado ID fornecido.
+                // "Marca" uma tarefa com Concluída, usando determinado ID fornecido.
                 case "complete":
                     completeTarefa(request, response);
                     break;
 
-                //"Desmarca" uma tarefa Concluída, tornando-a pendente novamente.
-                //Usando determinado ID fornecido.
+                // "Desmarca" uma tarefa Concluída, tornando-a pendente novamente.
+                // Usando determinado ID fornecido.
                 case "undone":
                     undoneTarefa(request, response);
                     break;
 
-                //Deleta uma tarefa, usando determinado ID.
+                // Deleta uma tarefa, usando determinado ID.
                 case "delete":
                     deleteTarefa(request, response);
                     break;
 
-                //Not Using: Função que encaminha para a página de confirmação de exclusão.
-                //Desativei pois não consegui fazer funcionar legal e eu queria fazer de uma forma
-                //em que usuário não fosse encaminhado para uma outra tela só pra confirmar uma exclusão. Tive que usar javascript :|
+                // Not Using: Função que encaminha para a página de confirmação de exclusão.
+                // Desativei pois não consegui fazer funcionar legal e eu queria fazer de uma
+                // forma
+                // em que usuário não fosse encaminhado para uma outra tela só pra confirmar uma
+                // exclusão. Tive que usar javascript :|
                 case "confirmDelete":
                     showConfirmDelete(request, response);
                     break;
 
-                //Sim, por default ele lista as tarefas, tá funcionando assim, não irei mexer no momento.
+                // Sim, por default ele retorna a lista das tarefas, tá funcionando assim, não
+                // irei mexer no momento.
                 default:
                     listTarefas(request, response);
                     break;
@@ -110,7 +113,7 @@ public class TarefaController extends HttpServlet {
     }
 
     //
-    //Função para listar as tarefas, devolve uma list de objetos TarefaVO.
+    // Função para listar as tarefas, envia uma list de objetos TarefaVO.
     //
     private void listTarefas(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -129,8 +132,9 @@ public class TarefaController extends HttpServlet {
     }
 
     //
-    //Not Using: Função não estão sendo usada, tinha a função de encaminhar o usuário para a tela de confirmação de exclusão.
-    //Mantive somente se caso no futuro eu resolva tentar utiliza-la novamente.
+    // Not Using: Função não estão sendo usada, função de encaminhar o usuário para
+    // a tela de confirmação de exclusão.
+    // Mantive somente se caso no futuro eu resolva tentar utiliza-la novamente.
     //
     private void showConfirmDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -141,7 +145,7 @@ public class TarefaController extends HttpServlet {
     }
 
     //
-    //Função para criar a tarefa.
+    // Função para criar a tarefa.
     //
     private void createTarefa(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ParseException {
@@ -165,7 +169,7 @@ public class TarefaController extends HttpServlet {
     }
 
     //
-    //Função para atualizar uma determinada tarefa.
+    // Função para atualizar uma determinada tarefa.
     //
     private void updateTarefa(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ParseException {
@@ -186,7 +190,7 @@ public class TarefaController extends HttpServlet {
     }
 
     //
-    //Função para deletar uma determinada tarefa.
+    // Função para deletar uma determinada tarefa.
     //
     private void deleteTarefa(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
@@ -198,7 +202,7 @@ public class TarefaController extends HttpServlet {
     }
 
     //
-    //Função para marcar uma tarefa como Concluída.
+    // Função para marcar uma tarefa como Concluída.
     //
     private void completeTarefa(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
@@ -210,7 +214,7 @@ public class TarefaController extends HttpServlet {
     }
 
     //
-    //Função para marcar uma tarefa como pendente novamente.
+    // Função para marcar uma tarefa como pendente novamente.
     //
     private void undoneTarefa(HttpServletRequest request, HttpServletResponse response)
             throws IOException {

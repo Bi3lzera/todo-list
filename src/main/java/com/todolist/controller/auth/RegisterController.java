@@ -62,7 +62,7 @@ public class RegisterController extends HttpServlet {
             user.setPassword(password, false); // hash internamente
         } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
             System.out.println(e);
-            response.sendRedirect(request.getContextPath() + "/views/login.jsp?error=1");
+            response.sendRedirect(request.getContextPath() + "/login?error=2");
             return;
         }
 
@@ -72,17 +72,19 @@ public class RegisterController extends HttpServlet {
         //Se a criação for um sucesso, chamada a função handleLogin para já realizar o login do usuário.
         if (created) {
             System.out.println("Usuário registrado: " + user.getName());
-            handleLoginSuccess(request, response, user);
+            response.sendRedirect(request.getContextPath() + "/login?signup=success");
         } else {
-            response.sendRedirect(request.getContextPath() + "/views/login.jsp?signup=failed");
+            response.sendRedirect(request.getContextPath() + "/login?signup=failed");
         }
     }
 
     //Realiza o login do usuário de acordo com o registro feito na função registerUser.
+    //DESATIVADA, pois achei não tão interessante, também verifiquei eventual problema com a não criação correta da sessão.
+    //Além de que isso garante que o usuário digitou o e-mail e a senha corretamente.
     private void handleLoginSuccess(HttpServletRequest request, HttpServletResponse response, UserVO user) throws IOException {
         HttpSession session = request.getSession();
         session.setAttribute("authUser", user);
 
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
+        response.sendRedirect(request.getContextPath() + "/index");
     }
 }

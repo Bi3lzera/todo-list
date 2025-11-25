@@ -1,13 +1,12 @@
 {
-  "emmet.includeLanguages": {
-    "jsp": "html"
-  },
   "java.configuration.updateBuildConfiguration": "automatic",
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
   "files.associations": {
     "*.jsp": "jsp",
     "*.tag": "jsp"
+  },
+  "emmet.includeLanguages": {
+    "jsp": "html"
   },
   "[jsp]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -15,12 +14,15 @@
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "[xml]": {
-    "editor.defaultFormatter": "Oracle.oracle-java"
-  },
   "remote.autoForwardPortsFallback": 0,
   "[css]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
-  "CodeGPT.apiKey": "Google AI Studio"
+  "CodeGPT.apiKey": "Google AI Studio",
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
 }

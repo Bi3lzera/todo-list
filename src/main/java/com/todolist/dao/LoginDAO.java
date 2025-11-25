@@ -12,10 +12,15 @@ import com.todolist.connection.BDConnection;
 import com.todolist.util.Hasher;
 import com.todolist.vo.UserVO;
 
+//
+//Algortimo responsável pelo login do usuário, realizando a conexão com o Banco de Dados.
+//
+
 public class LoginDAO {
 
     BDConnection bdConn = new BDConnection();
 
+    //Função que realiza o login.
     public UserVO Login(String Email, String Password) {
         UserVO tUser = new UserVO();
         try {
@@ -36,6 +41,7 @@ public class LoginDAO {
         return tUser;
     }
 
+    //Função que busca os dados do usuário no banco, por e-mail.
     private UserVO GetUserData(String Email) {
         try {
             Connection conn = bdConn.connect();
@@ -64,6 +70,7 @@ public class LoginDAO {
         }
     }
 
+    //Função que atualiza os dados do usuário.
     public boolean updateUser(UserVO user) {
         try {
             Connection conn = bdConn.connect();
@@ -87,28 +94,24 @@ public class LoginDAO {
         return false;
     }
 
+    //Função que cria um novo usuário.
     public boolean create(UserVO user) {
         try {
-            // não permite duplicar email
+            // Não permite duplicar email
             if (GetUserData(user.getEmail()) != null) {
                 return false;
             }
-
+            
             Connection conn = bdConn.connect();
             if (conn != null) {
                 PreparedStatement ps;
                 String sql = "INSERT INTO users (name, email, password) VALUES (?,?,?)";
-                ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps = conn.prepareStatement(sql); 
                 ps.setString(1, user.getName());
                 ps.setString(2, user.getEmail());
                 ps.setString(3, user.getHashedPassword());
                 int inserted = ps.executeUpdate();
-                if (inserted > 0) {
-                    ResultSet keys = ps.getGeneratedKeys();
-                    if (keys.next()) {
-                        user.setUserId(keys.getInt(1));
-                    }
-                }
+
                 bdConn.disconnect();
                 return inserted > 0;
             }
